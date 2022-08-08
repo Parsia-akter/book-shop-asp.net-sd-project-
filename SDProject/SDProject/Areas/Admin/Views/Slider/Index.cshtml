@@ -1,0 +1,102 @@
+﻿@using SDProject.Models
+@model IEnumerable<SliderImages>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool Flag = false;
+
+}
+@foreach (var item in Model)
+{
+    if (item.Id == 1)
+    {
+        Flag = true;
+
+
+    }
+}
+
+<br />
+<br />
+
+    <div class="row">
+        <div class="col-6">
+            <h4 class="text-info">IMAGE LIST</h4>
+        </div>
+        <div class="col-6 text-right">
+
+
+            @if (Flag == true)
+            {
+
+                <a asp-action="Edit" asp-route-id="1" class="btn btn-outline-success "> UPDATE</a>
+            }
+            else
+            { <a asp-action="create" class="btn btn-outline-info "> ADD</a>
+            }
+
+        </div>
+    </div>
+
+    <br />
+    <div class="p-4 rounded border box-shadow">
+        <table class="p-4 table table-striped border rounded box-shadow" id="myTable">
+            <thead>
+                <tr class="bg-info text-light">
+
+                    <th>
+                        @Html.DisplayNameFor(c => c.Image1)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(c => c.Image2)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(c => c.Image3)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(c => c.Image4)
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><img src="/@item.Image1" class="display-fluid no-repeat" width="100px" height="100px" /></td>
+                        <td><img src="/@item.Image2" class="display-fluid no-repeat" width="100px" height="100px" /></td>
+                        <td><img src="/@item.Image2" class="display-fluid no-repeat" width="100px" height="100px" /></td>
+                        <td><img src="/@item.Image2" class="display-fluid no-repeat" width="100px" height="100px" /></td>
+                        <td></td>
+                        <td></td>
+
+                    </tr>
+
+                }
+
+            </tbody>
+
+
+        </table>
+
+    </div>
+
+
+@section scripts{
+
+
+    <script>
+
+        $(function () {
+            var save = ' @TempData["save"]'
+            if (save != null) {
+                alertify.success(save);
+            }
+        });
+
+
+    </script>
+}

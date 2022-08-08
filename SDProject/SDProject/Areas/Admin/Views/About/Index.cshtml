@@ -1,0 +1,66 @@
+﻿@using SDProject.Models
+@model IEnumerable<About>
+
+
+@{
+    ViewData["Title"] = "Index";
+    bool Flag = false;
+    string about = null;
+}
+
+<br />
+<br />
+<div class="p-4 rounded border box-shadow">
+    <h4 class="text-center text-info display-4 mb-3">ABOUT US</h4>
+
+    @foreach (var item in Model)
+    {
+        if (item.Id == 1)
+        {
+            Flag = true;
+            if (Flag)
+            {
+                about = item.AboutUs;
+            }
+
+        }
+    }
+
+    @if (Flag == true)
+    {
+        <div class="p-4 rounded border box-shadow mb-5"> <p>@about</p></div>
+    }
+    else
+    {
+        <div class="p-4 rounded border box-shadow mb-5"> <p> </p></div>
+    }
+
+
+
+
+    @if (Flag == true)
+    {
+
+        <a asp-action="Edit" asp-route-id="1" class="btn btn-outline-success btn-block"> UPDATE</a>
+    }
+    else
+    { <a asp-action="create" class="btn btn-outline-info btn-block"> ADD</a>
+    }
+
+</div>
+
+@section scripts{
+
+
+    <script>
+
+        $(function () {
+            var save = ' @TempData["save"]'
+            if (save != null) {
+                alertify.success(save);
+            }
+        });
+
+
+    </script>
+}

@@ -1,0 +1,100 @@
+﻿
+
+@using SDProject.Models;
+@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<br />
+<br />
+
+    <div class="row">
+        <div class="col-6">
+            <h4 class="text-info">PRODUCT LIST</h4>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-action="create" class="btn btn-outline-info"> ADD NEW </a>
+        </div>
+    </div>
+
+    <br />
+    <div class="p-4 rounded border box-shadow">
+        <table class="p-4 table table-striped border rounded box-shadow" id="myTable">
+            <thead>
+                <tr class="bg-info text-light">
+                    <th>
+                        @Html.DisplayNameFor(c => c.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(c => c.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(c => c.CategoryId)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(c => c.Quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(c => c.Author)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(c => c.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(c => c.Image)
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Price</td>
+                        <td>@item.Category.Categories</td>
+
+                        <td>@item.Quantity</td>
+                        <td>@item.Author</td>
+                        <td>@item.Description</td>
+                        <td><img src="/@item.Image" class="display-fluid no-repeat" width="50px" height="50px" /></td>
+                        <td>
+                            <partial name="_ButtonPartial1" model="@item.Id" />
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+
+        </table>
+
+    </div>
+
+
+@section scripts{
+
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+
+        $(function () {
+            var save = ' @TempData["save"]'
+            if (save != null) {
+                alertify.success(save);
+            }
+        });
+
+
+    </script>
+}

@@ -1,0 +1,237 @@
+﻿@using SDProject.Models
+@model CatProduct
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "details";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+
+<section>
+    <div id="content">
+        <!-- #content Begin -->
+        <div class="container">
+            <!-- container Begin -->
+            <div class="col-md-12">
+                <!-- col-md-12 Begin -->
+
+                <ul class="breadcrumb">
+                    <!-- breadcrumb Begin -->
+                    <li>
+                        <a href="">Home</a>
+                    </li>
+                    <li>
+                        Shop
+                    </li>
+                </ul><!-- breadcrumb Finish -->
+
+            </div><!-- col-md-12 Finish -->
+
+            <div class="col-md-3">
+                <!-- col-md-3 Begin -->
+                <partial name="_sidebar" />
+
+
+            </div><!-- col-md-3 Finish -->
+
+            <div class="col-md-9">
+                <!-- col-md-9 Begin -->
+                <div id="productMain" class="row">
+                    <!-- row Begin -->
+                    <div class="col-sm-6">
+                        <!-- col-sm-6 Begin -->
+                        <div id="mainImage">
+                            <!-- #mainImage Begin -->
+                            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                <!-- carousel slide Begin -->
+                                <ol class="carousel-indicators">
+                                    <!-- carousel-indicators Begin -->
+                                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                                </ol><!-- carousel-indicators Finish -->
+
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                        <center><img class="img-responsive" src="/@Model.OneProductViewModel.Image"></center>
+                                    </div>
+                                    <div class="item">
+                                        <center><img class="img-responsive" src="/@Model.OneProductViewModel.Image"></center>
+                                    </div>
+                                    <div class="item">
+                                        <center><img class="img-responsive" src="~/@Model.OneProductViewModel.Image"></center>
+                                    </div>
+                                </div>
+
+                                <a href="#myCarousel" class="left carousel-control" data-slide="prev">
+                                    <!-- left carousel-control Begin -->
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a><!-- left carousel-control Finish -->
+
+                                <a href="#myCarousel" class="right carousel-control" data-slide="next">
+                                    <!-- right carousel-control Begin -->
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a><!-- right carousel-control Finish -->
+
+                            </div><!-- carousel slide Finish -->
+                        </div><!-- mainImage Finish -->
+                    </div><!-- col-sm-6 Finish -->
+
+                    <div class="col-sm-6">
+                        <!-- col-sm-6 Begin -->
+                        <div class="box">
+                            <!-- box Begin -->
+                            <h1 class="text-center">  @Model.OneProductViewModel.Name</h1>
+
+                            <form action="#" class="form-horizontal" method="post">
+                                <!-- form-horizontal Begin -->
+                                
+
+                              
+                                <h3>Tk. @Model.OneProductViewModel.Price</h3>
+                                <h4>Author: @Model.OneProductViewModel.Author</h4>
+
+                                <p class="text-center buttons"><button class="btn btn-primary i fa fa-shopping-cart" asp-action="Buy" asp-controller="Cart" asp-route-id="@Model.OneProductViewModel.Id"> Add to cart</button></p>
+
+                            </form><!-- form-horizontal Finish -->
+
+                        </div><!-- box Finish -->
+
+
+                    </div><!-- col-sm-6 Finish -->
+
+
+                </div><!-- row Finish -->
+
+                <div class="box mb-3" id="details">
+                    <!-- box Begin -->
+
+                    <h4>Product Details</h4>
+
+                    <p>
+
+                        @Model.OneProductViewModel.Description
+                    </p>
+
+                    <hr>
+
+                </div><!-- box Finish -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 >REVIEW AND RATINGS</h4>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a asp-controller="Customer" asp-action="Reviewss" asp-route-id="" class="btn btn-success">Write Review</a>
+                    </div>
+                </div>
+             
+                @foreach(var data in Model.Allreviewtest)
+                {
+                    
+            <div class="box mb-3" id="details">
+                <h3>@data.ApplicationUser.Name</h3>
+                <span class="text-warning float-right">
+                    @for (int i = 1; i <= data.Rating; i++)
+                    {
+                        <i class="ratingStar fa fa-star"></i>}
+                    @for (int i = 1; i <= 5 - data.Rating; i++)
+                    {
+                        <i class="ratingStar fa fa-star-o"></i>
+                    }
+
+                </span>
+
+                <p>@data.UserReview</p>
+            </div>
+                }
+
+            </div><!-- col-md-9 Finish -->
+
+        </div><!-- container Finish -->
+    </div><!-- #content Finish -->
+
+
+</section>
+
+
+<style scoped>
+    /*  Breadcrumb Styles  */
+
+    .breadcrumb {
+        padding: 8px 15px;
+        margin-bottom: 20px;
+        background: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
+    }
+
+        .breadcrumb > li + li:before {
+            content: ">\00a0";
+            color: #cccccc;
+        }
+
+
+    #advantages {
+        text-align: center;
+    }
+
+    .box {
+        background: #ffffff;
+        margin: 0 0 30px;
+        border: solid 1px #e6e6e6;
+        box-sizing: border-box;
+        padding: 20px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, .3);
+    }
+
+    #advantages .box .icon {
+        position: absolute;
+        font-size: 120px;
+        width: 100%;
+        text-align: center;
+        top: -20px;
+        left: 0px;
+        height: 100%;
+        float: left;
+        color: #dadada;
+        box-sizing: border-box;
+        z-index: 1;
+    }
+
+    #advantages .box h3 {
+        position: relative;
+        margin: 0 0 20px;
+        font-weight: 300;
+        text-transform: uppercase;
+        z-index: 2;
+    }
+
+        #advantages .box h3 a {
+            color: #4fbfa8;
+        }
+
+            #advantages .box h3 a:hover {
+                text-decoration: none;
+            }
+
+    #advantages .box p {
+        position: relative;
+        z-index: 2;
+        color: #555555;
+    }
+
+    #slider {
+        margin-bottom: 40px;
+    }
+
+    #details {
+        margin-top: 30px;
+    }
+</style>
+

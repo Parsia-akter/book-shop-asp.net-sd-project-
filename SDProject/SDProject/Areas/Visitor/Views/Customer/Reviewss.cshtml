@@ -1,0 +1,168 @@
+﻿@using SDProject.Models
+
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model ReviewTest
+@{
+    ViewData["Title"] = "Reviewss";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+    // var url = Url.RequestContext.RouteData.Values["id"];
+    //var proid = ViewBag.proid;
+}
+
+
+
+<div class='col-md-9 col-sm-6  col-md-offset-2 center-responsive'>
+    <div class="box" id="details">
+        <!-- box Begin -->
+        <div asp-validation-summary="ModelOnly" class="text-danger">
+
+        </div>
+        <h4>Product Review</h4>
+        <hr>
+
+        <form asp-action="Reviewss" method="post">
+            <span class="text-warning float-right">
+                <i class="ratingStar fa fa-star-o" data-value="1"></i>
+                <i class="ratingStar fa fa-star-o" data-value="2"></i>
+                <i class="ratingStar fa fa-star-o" data-value="3"></i>
+                <i class="ratingStar fa fa-star-o" data-value="4"></i>
+                <i class="ratingStar fa fa-star-o" data-value="5"></i>
+            </span>
+            <input type="hidden" asp-for="Rating" id="ratingsValue" />
+            <span asp-validation-for="Rating" class="text-danger"></span>
+
+            <div class="form-group">
+                <!-- form-group Begin -->
+
+
+
+                <input asp-for="UserReview" class="form-control" />
+                <span asp-validation-for="UserReview" class="text-danger"></span>
+
+            </div><!-- form-group Finish -->
+            <div class="form-group">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <!-- <input type="hidden" asp-for="GetProductId" > -->
+                    <input type="hidden" asp-for="UserId" value=@UserManager.GetUserId(User) />
+                    <input type="submit" class="btn btn-primary" value="Save" />}
+                else
+                {
+                    <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary">Save</a>
+                }
+
+            </div>
+        </form>
+
+
+
+    </div><!-- box Finish -->
+
+
+
+</div>
+<script>
+    $(".ratingStar").hover(function () {
+        $(".ratingStar").addClass("fa-star-o").removeClass("fa-star");
+        $(this).addClass("fa-star").removeClass("fa-star-o");
+        $(this).prevall(".ratingStar").addClass("fa-star").removeClass("fa-star-o");
+    });
+
+    $(".ratingStar").click(function () {
+        var starvalue = $(this).attr("data-value");
+        $("#ratingsValue").val(starvalue);
+    });
+</script>
+
+<style scoped>
+    /*  Breadcrumb Styles  */
+
+    .breadcrumb {
+        padding: 8px 15px;
+        margin-bottom: 20px;
+        background: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
+    }
+
+        .breadcrumb > li + li:before {
+            content: ">\00a0";
+            color: #cccccc;
+        }
+
+
+    #advantages {
+        text-align: center;
+    }
+
+    .box {
+        background: #ffffff;
+        margin: 0 0 30px;
+        border: solid 1px #e6e6e6;
+        box-sizing: border-box;
+        padding: 20px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, .3);
+    }
+
+    #advantages .box .icon {
+        position: absolute;
+        font-size: 120px;
+        width: 100%;
+        text-align: center;
+        top: -20px;
+        left: 0px;
+        height: 100%;
+        float: left;
+        color: #dadada;
+        box-sizing: border-box;
+        z-index: 1;
+    }
+
+    #advantages .box h3 {
+        position: relative;
+        margin: 0 0 20px;
+        font-weight: 300;
+        text-transform: uppercase;
+        z-index: 2;
+    }
+
+        #advantages .box h3 a {
+            color: #4fbfa8;
+        }
+
+            #advantages .box h3 a:hover {
+                text-decoration: none;
+            }
+
+    #advantages .box p {
+        position: relative;
+        z-index: 2;
+        color: #555555;
+    }
+
+
+
+    #details {
+        margin-top: 30px;
+    }
+
+
+</style>
+
+@section Scripts {
+  
+    <script>
+
+        $(function () {
+            var save = ' @TempData["save"]'
+            if (save != null) {
+                alertify.success(save);
+            }
+        });
+
+
+    </script>
+}

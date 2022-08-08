@@ -1,0 +1,62 @@
+﻿@using SDProject.Models
+@model CatProduct
+@{
+    ViewData["Title"] = "Seller";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<br />
+<br />
+
+    <h4 class="text-info">SELLER LIST</h4>
+
+
+
+    <br />
+    <div class="p-4 border rounded box-shadow">
+        <table class="table table-striped border  box-shadow" id="myTable">
+            <thead>
+                <tr class="bg-info text-light">
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.userLists)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.UserName</td>
+
+
+                    </tr>
+                }
+            </tbody>
+          
+         
+        </table>
+
+    </div>
+
+
+@section scripts{
+
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+
+
+
+
+    </script>
+
+}

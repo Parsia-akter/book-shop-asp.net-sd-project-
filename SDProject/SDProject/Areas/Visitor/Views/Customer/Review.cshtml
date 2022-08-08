@@ -1,0 +1,47 @@
+﻿@using SDProject.Models
+@model Review1
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Review";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+    var proid = ViewBag.proid;
+}
+
+<h1>Review</h1>
+
+<div>
+    <form asp-action="Review" method="post">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger">
+
+        </div>
+
+        <!-- <input type="hidden" asp-for="GetProductId" value=@proid>
+        <!-- <span class="text-warning float-right">
+         <i class="ratingStar fa fa-star" data-value="1"></i>
+         <i class="ratingStar fa fa-star-o" data-value="2"></i>
+         <i class="ratingStar fa fa-star-o" data-value="3"></i>
+         <i class="ratingStar fa fa-star-o" data-value="4"></i>
+         <i class="ratingStar fa fa-star-o" data-value="5"></i>
+     </span>-->
+        <!--  <input type="hidden" asp-for="Rating" id="ratingsValue" />-->
+        <div class="form-group">
+            <input class="form-control" type="text" asp-for="WriteReview" placeholder="Write review..." />
+            <span asp-validation-for="WriteReview" class="text-danger"></span>
+        </div>
+
+
+        @if (SignInManager.IsSignedIn(User))
+        {
+             <input type="hidden" asp-for="GetUserId" value=@UserManager.GetUserId(User) />
+            <input type="submit" value="Submit" class="btn btn-warning" />}
+        else
+        {
+            <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary">Save</a>
+        }
+
+    </form>
+</div>
+

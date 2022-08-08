@@ -1,0 +1,74 @@
+﻿
+<section>
+    <div class="panel panel-default sidebar-menu">
+        <!-- panel panel-default sidebar-menu Begin -->
+        <div class="panel-heading">
+            <!-- panel-heading Begin -->
+            <h3 class="panel-title">Products Categories</h3>
+        </div><!-- panel-heading Finish -->
+
+        <div class="panel-body">
+            <!-- panel-body Begin -->
+            <ul class="nav nav-pills nav-stacked category-menu">
+                <!-- nav nav-pills nav-stacked category-menu Begin -->
+                @foreach (var data in Model.AllCategoryViewModel)
+                {
+                    <li><a asp-action="ProductsOfCategory" asp-controller="Customer" asp-route-id="@data.Id">@data.Categories</a></li>
+}
+
+
+            </ul><!-- nav nav-pills nav-stacked category-menu Finish -->
+        </div><!-- panel-body Finish -->
+
+    </div><!-- panel panel-default sidebar-menu Finish -->
+
+
+    <div class="panel panel-default sidebar-menu">
+        <!-- panel panel-default sidebar-menu Begin -->
+        <div class="panel-heading">
+            <!-- panel-heading Begin -->
+            <h3 class="panel-title">Shop Name</h3>
+        </div><!-- panel-heading Finish -->
+
+        <div class="panel-body">
+            <!-- panel-body Begin -->
+            <ul class="nav nav-pills nav-stacked category-menu">
+                <!-- nav nav-pills nav-stacked category-menu Begin -->
+
+                @foreach (var data in Model.userLists)
+                {
+                    <li><a asp-action="ProductsOfSeller" asp-controller="Customer" asp-route-id="@data.Id">@data.Name</a></li>
+                }
+
+
+            </ul><!-- nav nav-pills nav-stacked category-menu Finish -->
+        </div><!-- panel-body Finish -->
+
+    </div><!-- panel panel-default sidebar-menu Finish -->
+</section>
+
+<style scoped>
+
+/*  Products Categories & Categories Styles */
+#content .panel.sidebar-menu{
+    box-sizing: border-box;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
+}
+#content .panel.sidebar-menu ul.nav.category-menu{
+    margin-bottom: 20px;
+}
+#content .panel.sidebar-menu ul.nav.category-menu li a{
+    text-transform: uppercase;
+    font-weight: 600;
+}
+#content .panel.sidebar-menu h3{
+    padding: 5px 0px;
+    margin: 0px;
+}
+
+/*  Shop Products Tyles  */
+
+
+
+
+</style>

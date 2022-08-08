@@ -1,0 +1,35 @@
+﻿
+@model SDProject.Models.Category
+@{
+    ViewData["Title"] = "Edit";
+}
+<br />
+<br/>
+
+    <h4 class="text-info">EDIT CATEGORY</h4>
+    <form asp-action="Edit" method="post">
+        <div class="p-4 rounded border box-shadow">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger">
+
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Categories"></label>
+                </div>
+                <div class="col-10">
+                    <input asp-for="Categories" class="form-control box-shadow" />
+                </div>
+                <span asp-validation-for="Categories" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-outline-primary" value="UPDATE" />
+                <a asp-action="Index" class="btn btn-outline-success">BACK TO LIST </a>
+            </div>
+        </div>
+    </form>
+    
+
+    @section Scripts{
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

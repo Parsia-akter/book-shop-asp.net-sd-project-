@@ -1,0 +1,74 @@
+﻿@using SDProject.Models;
+@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<br />
+<br />
+
+    <div class="row">
+        <div class="col-6">
+            <h4 class="text-info">CATEGORY LIST</h4>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-action="create" class="btn btn-outline-info"> ADD NEW</a>
+        </div>
+    </div>
+
+    <br />
+    <div class="p-4 border rounded box-shadow">
+        <table class="table table-striped border  box-shadow" id="myTable">
+            <thead>
+                <tr class="bg-info text-light">
+                    <th>
+                        @Html.DisplayNameFor(c => c.Categories)
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Categories</td>
+
+                        <td>
+                            <partial name="_ButtonPartial" model="@item.Id" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+          
+        </table>
+
+    </div>
+
+@section scripts{
+
+  
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+
+        $(function () {
+            var save = ' @TempData["save"]'
+            if (save != null) {
+                alertify.success(save);
+            }
+        });
+        
+
+    </script>
+}
+
+
+
+
+
+
+

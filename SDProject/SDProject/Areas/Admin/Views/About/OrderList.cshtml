@@ -1,0 +1,87 @@
+﻿@using SDProject.Models
+@model CatProduct
+@{
+    ViewData["Title"] = "OrderList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+
+
+
+    <h4 class="text-info">ORDER LIST</h4>
+
+
+    <br />
+    <div class="p-4 rounded border box-shadow">
+        <table class="p-4 table table-striped border rounded box-shadow" id="myTable">
+            <thead>
+                <tr class="bg-info text-light">
+                    <th>
+                        Order Id
+                    </th>
+                    <th>
+                        Order Number
+                    </th>
+                    <th>User Name</th>
+                    <th>User Email</th>
+                    <th>
+                        Product Name
+                    </th>
+                    <th>
+                        Product Price
+                    </th>
+                    <th>
+                        Product Image
+                    </th>
+
+                    <th>
+                        Address
+                    </th>
+                    <th>
+                        Date of Order
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.OrderDetails2)
+                {
+                <tr>
+                    <td>@item.Order.Id</td>
+                    <td>@item.Order.OrderId</td>
+                    <td>@item.Order.ApplicationUser.Name</td>
+                    <td>@item.Order.ApplicationUser.UserName</td>
+                    <td>@item.Item.Name</td>
+                    <td>@item.Item.Price</td>
+                    <td><img src="/@item.Item.Image" class="display-fluid no-repeat" width="50px" height="50px" /></td>
+                    <td>@item.Order.Address</td>
+                    <td>@item.Order.Date</td>
+
+                </tr>
+                }
+
+            </tbody>
+
+
+        </table>
+
+    </div>
+
+@section scripts{
+
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+
+
+
+
+    </script>
+
+}

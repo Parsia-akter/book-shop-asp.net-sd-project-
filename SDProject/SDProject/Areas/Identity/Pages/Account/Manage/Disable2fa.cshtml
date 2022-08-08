@@ -1,0 +1,100 @@
+﻿@page
+@model Disable2faModel
+@{
+    ViewData["Title"] = "Disable two-factor authentication (2FA)";
+    ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+}
+
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="box" id="details">
+    <h2>@ViewData["Title"]</h2>
+
+    <div class="alert alert-warning" role="alert">
+        <p>
+            <strong>This action only disables 2FA.</strong>
+        </p>
+        <p>
+            Disabling 2FA does not change the keys used in authenticator apps. If you wish to change the key
+            used in an authenticator app you should <a asp-page="./ResetAuthenticator">reset your authenticator keys.</a>
+        </p>
+    </div>
+
+    <div>
+        <form method="post" class="form-group">
+            <button class="btn btn-danger" type="submit">Disable 2FA</button>
+        </form>
+    </div>
+</div>
+
+<style scoped>
+    /*  Breadcrumb Styles  */
+
+    .breadcrumb {
+        padding: 8px 15px;
+        margin-bottom: 20px;
+        background: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
+    }
+
+        .breadcrumb > li + li:before {
+            content: ">\00a0";
+            color: #cccccc;
+        }
+
+
+    #advantages {
+        text-align: center;
+    }
+
+    .box {
+        background: #ffffff;
+        margin: 0 0 30px;
+        border: solid 1px #e6e6e6;
+        box-sizing: border-box;
+        padding: 20px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, .3);
+    }
+
+    #advantages .box .icon {
+        position: absolute;
+        font-size: 120px;
+        width: 100%;
+        text-align: center;
+        top: -20px;
+        left: 0px;
+        height: 100%;
+        float: left;
+        color: #dadada;
+        box-sizing: border-box;
+        z-index: 1;
+    }
+
+    #advantages .box h3 {
+        position: relative;
+        margin: 0 0 20px;
+        font-weight: 300;
+        text-transform: uppercase;
+        z-index: 2;
+    }
+
+        #advantages .box h3 a {
+            color: #4fbfa8;
+        }
+
+            #advantages .box h3 a:hover {
+                text-decoration: none;
+            }
+
+    #advantages .box p {
+        position: relative;
+        z-index: 2;
+        color: #555555;
+    }
+
+
+
+    #details {
+        margin-top: 30px;
+    }
+</style>

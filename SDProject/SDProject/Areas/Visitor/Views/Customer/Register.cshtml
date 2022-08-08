@@ -1,0 +1,57 @@
+﻿@model SDProject.Models.Customer
+@{
+ ViewData["Title"] = "Register"; 
+}
+
+<div class="p-4 rounded border box-shadow">
+    <h4 class="text-info">REGISTER</h4>
+    <form asp-action="Register " method="post" class=" box-shadow">
+        <div class="p-4 rounded border">
+            <div asp-validation-summary="ModelOnly" class="text-danger">
+
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Name"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Name" class="form-control  box-shadow" />
+                </div>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Email"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Email" class="form-control  box-shadow" />
+                </div>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Password"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Password" class="form-control  box-shadow" />
+                </div>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Number"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Number" class="form-control  box-shadow" />
+                </div>
+                <span asp-validation-for="Number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-outline-primary" value="SAVE" />
+
+            </div>
+            <div>@ViewBag.message</div>
+        </div>
+    </form>
+</div>
+

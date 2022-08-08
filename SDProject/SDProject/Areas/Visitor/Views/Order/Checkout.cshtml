@@ -1,0 +1,160 @@
+﻿@using SDProject.Models
+@using SDProject.Helpers
+@using Microsoft.AspNetCore.Identity
+@using System.Collections.Generic;
+
+
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model Order2
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+
+
+
+}
+
+
+
+<div class="box" id="details">
+    <h4>Checkout</h4>
+    <br />
+    <table cellpadding="2" cellspacing="2" border="1">
+        <tr>
+            <th>Total Amount to Pay</th>
+        </tr>
+        <tr>
+            <td>Tk @ViewBag.total</td>
+        </tr>
+    </table>
+    <br />
+
+    <form asp-action="Checkout" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger">
+
+        </div>
+
+
+        <div class="form-group">
+            <!-- form-group Begin -->
+            <div class="col-4">  <label asp-for="Address"></label></div>
+            <div class="col-8"> <input asp-for="Address" class="form-control" /></div>
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div><!-- form-group Finish -->
+        <div class="form-group">
+            <!-- form-group Begin -->
+            <div class="col-4"> <label asp-for="Date"></label></div>
+            <div class="col-8">  <input asp-for="Date" class="form-control" /></div>
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div><!-- form-group Finish -->
+
+
+
+
+
+
+
+        <div class="form-group">
+            @if (SignInManager.IsSignedIn(User))
+            {
+
+                <input type="hidden" asp-for="UserId" value=@UserManager.GetUserId(User) />
+                <input type="submit" class="btn btn-primary" value="Order Confirm" />}
+            else
+            {
+                <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary">Order Confirm</a>
+            }
+
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+
+        $(function () {
+            var save = ' @TempData["save"]'
+            if (save != null) {
+                alertify.success(save);
+            }
+        });
+
+
+    </script>
+}
+<style scoped>
+    /*  Breadcrumb Styles  */
+
+    .breadcrumb {
+        padding: 8px 15px;
+        margin-bottom: 20px;
+        background: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
+    }
+
+        .breadcrumb > li + li:before {
+            content: ">\00a0";
+            color: #cccccc;
+        }
+
+
+    #advantages {
+        text-align: center;
+    }
+
+    .box {
+        background: #ffffff;
+        margin: 0 0 30px;
+        border: solid 1px #e6e6e6;
+        box-sizing: border-box;
+        padding: 20px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, .3);
+    }
+
+    #advantages .box .icon {
+        position: absolute;
+        font-size: 120px;
+        width: 100%;
+        text-align: center;
+        top: -20px;
+        left: 0px;
+        height: 100%;
+        float: left;
+        color: #dadada;
+        box-sizing: border-box;
+        z-index: 1;
+    }
+
+    #advantages .box h3 {
+        position: relative;
+        margin: 0 0 20px;
+        font-weight: 300;
+        text-transform: uppercase;
+        z-index: 2;
+    }
+
+        #advantages .box h3 a {
+            color: #4fbfa8;
+        }
+
+            #advantages .box h3 a:hover {
+                text-decoration: none;
+            }
+
+    #advantages .box p {
+        position: relative;
+        z-index: 2;
+        color: #555555;
+    }
+
+
+
+    #details {
+        margin-top: 30px;
+    }
+</style>
+

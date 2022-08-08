@@ -1,0 +1,101 @@
+﻿@model SDProject.Models.Product
+@{
+    ViewData["Title"] = "Delete";
+}
+<br />
+<br />
+
+    <h4 class="text-info">DELETE PRODUCT</h4>
+    <form asp-action="Delete" method="post" enctype="multipart/form-data">
+        <div class="p-4 rounded border row box-shadow">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger">
+
+            </div>
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Name"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Name" class="form-control" readonly="readonly" />
+                    </div>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Price"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Price" class="form-control" readonly="readonly" />
+                    </div>
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+
+
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="CategoryId"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="CategoryId" class="form-control" readonly="readonly" />
+                    </div>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="UserId"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="ApplicationUser.Name" class="form-control" readonly="readonly" />
+                    </div>
+                    <span asp-validation-for="UserId" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Quantity"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Quantity" class="form-control" readonly="readonly" />
+                    </div>
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Author"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Author" class="form-control" readonly="readonly" />
+                    </div>
+                    <span asp-validation-for="Author" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Description"></label>
+                    </div>
+                    <div class="col-8">
+                        <textarea asp-for="Description" class="form-control" readonly="readonly"> </textarea>
+                    </div>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-outline-danger" value="DELETE" />
+                    <a asp-action="Index" class="btn btn-outline-success">BACK TO LIST </a>
+                </div>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-3 border rounded box-shadow">
+                <img src="/@Model.Image" width="100%" class="rounded box-shadow mt-5" />
+            </div>
+
+        </div>
+    </form>
+    
+
+    @section Scripts{
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

@@ -1,0 +1,37 @@
+﻿@inject SignInManager<IdentityUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+<ul class="nav nav-pills flex-column panel panel-default sidebar-menu">
+    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a></li>
+    @if (hasExternalLogins)
+    {
+        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
+    }
+     <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
+</ul>
+<style scoped>
+    /*  Products Categories & Categories Styles */
+    #content .panel.sidebar-menu {
+        box-sizing: border-box;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
+    }
+
+        #content .panel.sidebar-menu ul.nav.category-menu {
+            margin-bottom: 20px;
+        }
+
+            #content .panel.sidebar-menu ul.nav.category-menu li a {
+                text-transform: uppercase;
+                font-weight: 600;
+            }
+
+        #content .panel.sidebar-menu h3 {
+            padding: 5px 0px;
+            margin: 0px;
+        }
+</style>
+

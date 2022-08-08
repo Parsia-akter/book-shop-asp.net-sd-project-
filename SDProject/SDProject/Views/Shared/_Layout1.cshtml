@@ -1,0 +1,410 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BookPoint</title>
+    <!-- Latest compiled and minified CSS -->
+    <!--<link rel="stylesheet" href="~/css/bootstrap-337.min.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site1.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="shortcut icon" href="~/images/booklogo.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <header>
+
+        <div id="top">
+            <!-- Top Begin -->
+
+            <div class="container">
+                <!-- container Begin -->
+
+                <div class="col-md-6 offer">
+                    <!-- col-md-6 offer Begin -->
+
+                    <a href="#" class="btn btn-success btn-sm">Welcome</a>
+                   
+
+                </div><!-- col-md-6 offer Finish -->
+
+                <div class="col-md-6">
+                    <!-- col-md-6 Begin -->
+
+                    <ul class="menu">
+                        <!-- cmenu Begin -->
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> @User.Identity.Name</a>
+                            </li>
+                            <li class="nav-item">
+                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("home", "Customer", new { area = "Visitor " })" method="post" id="logoutForm">
+                                    <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                            </li>
+                        }
+
+                        <!-- <li>
+         <a href="#">Go To Cart</a>
+     </li>-->
+
+
+                    </ul><!-- menu Finish -->
+
+                </div><!-- col-md-6 Finish -->
+
+            </div><!-- container Finish -->
+
+        </div><!-- Top Finish -->
+
+        <div id="navbar" class="navbar navbar-default">
+            <!-- navbar navbar-default Begin -->
+
+            <div class="container">
+                <!-- container Begin -->
+
+                <div class="navbar-header">
+                    <!-- navbar-header Begin -->
+
+                    <a href="#" class="navbar-brand home">
+                        <!-- navbar-brand home Begin -->
+
+                        <img src="~/images/book-point-logo.jpg" alt="" class="hidden-xs">
+                        <!-- <img src="images/ecom-store-logo-mobile.png" alt="M-dev-Store Logo Mobile" class="visible-xs"> -->
+
+                    </a><!-- navbar-brand home Finish -->
+
+                    <button class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+
+                        <span class="sr-only">Toggle Navigation</span>
+
+                        <i class="fa fa-align-justify"></i>
+
+                    </button>
+
+                    <button class="navbar-toggle" data-toggle="collapse" data-target="#search">
+
+                        <span class="sr-only">Toggle Search</span>
+
+                        <i class="fa fa-search"></i>
+
+                    </button>
+
+                </div><!-- navbar-header Finish -->
+
+                <div class="navbar-collapse collapse" id="navigation">
+                    <!-- navbar-collapse collapse Begin -->
+
+                    <div class="padding-nav">
+                        <!-- padding-nav Begin -->
+
+                        <ul class="nav navbar-nav left">
+                            <!-- nav navbar-nav left Begin -->
+
+                            <li class="active">
+                                <a class="nav-link " asp-area="Visitor" asp-controller="Customer" asp-action="home">Home</a>
+                            </li>
+                            <li>
+                                <a class="nav-link " asp-area="Visitor" asp-controller="Customer" asp-action="AllProducts">All Products</a>
+                            </li>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <li>
+
+                                    <a class="nav-link " asp-area="Identity" asp-page="/Account/Manage/Index" >My Account</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                                </li>
+
+                            }
+
+                            <li>
+
+                                <a class="nav-link " asp-area="Visitor" asp-controller="Customer" asp-action="contact">Contact Us</a>
+                            </li>
+                            <li>
+
+                                <a class="nav-link " asp-area="Visitor" asp-controller="Customer" asp-action="about">About</a>
+                            </li>
+
+                        </ul><!-- nav navbar-nav left Finish -->
+
+                    </div><!-- padding-nav Finish -->
+
+                    <a asp-area="Visitor" asp-controller="Cart" asp-action="Index" class="btn navbar-btn btn-primary right">
+                        <!-- btn navbar-btn btn-primary Begin -->
+
+                        <i class="fa fa-shopping-cart"></i>
+
+                        <span>Shopping Cart</span>
+
+                    </a><!-- btn navbar-btn btn-primary Finish -->
+
+                    <div class="navbar-collapse collapse right">
+                        <!-- navbar-collapse collapse right Begin -->
+
+                        <button class="btn btn-primary navbar-btn" type="button" data-toggle="collapse" data-target="#search">
+                            <!-- btn btn-primary navbar-btn Begin -->
+
+                            <span class="sr-only">Toggle Search</span>
+
+                            <i class="fa fa-search"></i>
+
+                        </button><!-- btn btn-primary navbar-btn Finish -->
+
+                    </div><!-- navbar-collapse collapse right Finish -->
+
+                    <div class="collapse clearfix" id="search">
+                        <!-- collapse clearfix Begin -->
+
+                        <form method="get" action="results.php" class="navbar-form">
+                            <!-- navbar-form Begin -->
+
+                            <div class="input-group">
+                                <!-- input-group Begin -->
+
+                                <input type="text" class="form-control" placeholder="Search" name="user_query" required>
+
+                                <span class="input-group-btn">
+                                    <!-- input-group-btn Begin -->
+
+                                    <button type="submit" name="search" value="Search" class="btn btn-primary">
+                                        <!-- btn btn-primary Begin -->
+
+                                        <i class="fa fa-search"></i>
+
+                                    </button><!-- btn btn-primary Finish -->
+
+                                </span><!-- input-group-btn Finish -->
+
+                            </div><!-- input-group Finish -->
+
+                        </form><!-- navbar-form Finish -->
+
+                    </div><!-- collapse clearfix Finish -->
+
+                </div><!-- navbar-collapse collapse Finish -->
+
+            </div><!-- container Finish -->
+
+        </div>
+
+        <!-- navbar navbar-default Finish -->
+    </header>
+
+
+
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <section>
+        <div id="footer" class="mt-4">
+            <!-- #footer Begin -->
+            <div class="container">
+                <!-- container Begin -->
+                <div class="row">
+                    <!-- row Begin -->
+                    <div class="col-sm-6 col-md-3">
+                        <!-- col-sm-6 col-md-3 Begin -->
+
+                        <h4>Pages</h4>
+
+                        <ul>
+                            <!-- ul Begin -->
+                            <li><a asp-area="Visitor" asp-controller="Customer" asp-action="AllProducts">All Products</a></li>
+                            <li><a asp-area="Visitor" asp-controller="Customer" asp-action="contact">Contact Us</a></li>
+                            <li><a asp-area="Visitor" asp-controller="Customer" asp-action="about">About Us</a></li>
+                            
+                        </ul><!-- ul Finish -->
+
+                        <hr>
+
+                        <h4>User Section</h4>
+
+                        <ul>
+                            <!-- ul Begin -->
+                            <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+                            <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+                        </ul><!-- ul Finish -->
+
+                        <hr class="hidden-md hidden-lg hidden-sm">
+
+                    </div><!-- col-sm-6 col-md-3 Finish -->
+
+                    <div class="com-sm-6 col-md-3">
+                        <!-- col-sm-6 col-md-3 Begin -->
+
+                        <h4>Top Products Categories</h4>
+
+                        <ul>
+                            <!-- ul Begin -->
+                            <li><a href="#">A</a></li>
+                            <li><a href="#">B</a></li>
+                            <li><a href="#">C</a></li>
+                            <li><a href="#">D</a></li>
+                            <li><a href="#"></a></li>
+                        </ul><!-- ul Finish -->
+
+                        <hr class="hidden-md hidden-lg">
+
+                    </div><!-- col-sm-6 col-md-3 Finish -->
+
+                    <div class="col-sm-6 col-md-3">
+                        <!-- col-sm-6 col-md-3 Begin -->
+
+                        <h4>Find Us</h4>
+
+                        <p>
+                            <!-- p Start -->
+
+                            <strong>Book Point</strong>
+                            <br />Dhaka
+                            <br />Bangladesh
+                            <br />000000000000
+                            <br />170204011@aust.edu
+                            <br /><strong>Parsia Akter</strong>
+
+                        </p><!-- p Finish -->
+
+                        <a href="contact.php">Check Our Contact Page</a>
+
+                        <hr class="hidden-md hidden-lg">
+
+                    </div><!-- col-sm-6 col-md-3 Finish -->
+
+                    <div class="col-sm-6 col-md-3">
+
+
+                        <hr>
+
+                        <h4>Keep In Touch</h4>
+
+                        <p class="social">
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true" style="color: blue"></i></a>
+                            <a href="#" class="fa fa-twitter"></a>
+                            <a href="#" class="fa fa-instagram"></a>
+                            <a href="#" class="fa fa-google-plus"></a>
+                            <a href="#" class="fa fa-envelope"></a>
+                        </p>
+
+                    </div>
+                </div><!-- row Finish -->
+            </div><!-- container Finish -->
+        </div><!-- #footer Finish -->
+
+
+        <div id="copyright">
+            <!-- #copyright Begin -->
+            <div class="container">
+                <!-- container Begin -->
+                <div class="col-md-6">
+                    <!-- col-md-6 Begin -->
+
+                    <p class="pull-left">&copy; 2021 Book Point All Rights Reserve</p>
+
+                </div><!-- col-md-6 Finish -->
+                <div class="col-md-6">
+                    <!-- col-md-6 Begin -->
+
+                    <p class="pull-right">Theme by: <a href="#">Parsia Akter</a></p>
+
+                </div><!-- col-md-6 Finish -->
+            </div><!-- container Finish -->
+        </div><!-- #copyright Finish -->
+    </section>
+    <style scoped>
+        /*  Footer Styles  */
+
+        #footer {
+            background: #e0e0e0;
+            padding: 20px 0;
+        }
+
+            #footer a {
+                color: #999999;
+                padding: 0;
+                text-decoration: none;
+            }
+
+                #footer a:hover {
+                    color: #666666;
+                }
+
+            #footer ul {
+                list-style: none;
+                padding-left: 0px;
+            }
+
+            #footer .social {
+                text-align: left;
+            }
+
+                #footer .social a {
+                    margin: 0px 10px 0px 0px;
+                    display: inline-block;
+                    color: #ffffff;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 15px;
+                    line-height: 30px;
+                    font-size: 15px;
+                    text-align: center;
+                    vertical-align: bottom;
+                    background: #555555;
+                    text-decoration: none;
+                }
+
+                    #footer .social a:hover {
+                        color: #dedede;
+                        background: #777777;
+                    }
+
+        /*  Copyright Styles  */
+
+        #copyright {
+            background: #333333;
+            color: #cccccc;
+            padding: 20px 0px;
+            font-size: 12px;
+        }
+
+            #copyright p {
+                margin: 0px;
+            }
+    </style>
+    <!--<script src="~/lib/jquery/dist/jquery.js"></script>-->
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
